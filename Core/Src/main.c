@@ -31,7 +31,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+#include "DWT.h"
 
 /* USER CODE END PTD */
 
@@ -99,6 +99,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   //I2C нужно ставить 800000
   //setup();
+  delay_micros(1111);
+
   xTraceEnable(TRC_START);
   /* USER CODE END 2 */
 

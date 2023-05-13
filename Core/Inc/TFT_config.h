@@ -1,6 +1,7 @@
 #ifndef INC_TFT_CONFIG_H_
 #define INC_TFT_CONFIG_H_
 
+//Выбор используемых интерфейсов
 //#define TFT_USE_SPI
 #define TFT_USE_I2С
 
@@ -8,7 +9,7 @@
 
 
 
-//
+//Выбор используемого драйвера
 #define TFT_Driver_SSD1306
 //#define TFT_Driver_ILI9225
 //#define TFT_Driver_ST7789
