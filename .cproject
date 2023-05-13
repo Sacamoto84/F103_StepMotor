@@ -102,6 +102,29 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.1736130350" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec"/>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.679840075.1464519874" name="/" resourcePath="uTFT2/Video">
+						<toolChain id="com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.exe.debug.868259448" name="MCU ARM GCC" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.exe.debug" unusedChildren="">
+							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_mcu.1175703855.1666434579" name="MCU" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_mcu.1175703855"/>
+							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_cpuid.372642280.2084335652" name="CPU" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_cpuid.372642280"/>
+							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_coreid.1451495392.979826769" name="Core" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_coreid.1451495392"/>
+							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board.1658913812.1740369030" name="Board" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board.1658913812"/>
+							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1659980488.729217198" name="Defaults" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1659980488"/>
+							<option id="com.st.stm32cube.ide.mcu.debug.option.cpuclock.609455867.1474745807" name="Cpu clock frequence" superClass="com.st.stm32cube.ide.mcu.debug.option.cpuclock.609455867"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.438047781" name="MCU GCC Assembler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.431565878"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1212372975" name="MCU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.2077387152"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.226760680" name="MCU G++ Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.1667185543"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.1734163054" name="MCU GCC Linker" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.linker.166428682"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.1054379256" name="MCU G++ Linker" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.2054346011"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.archiver.2107439332" name="MCU GCC Archiver" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.archiver.503212065"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.size.544563668" name="MCU Size" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.size.338159794"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objdump.listfile.1242416617" name="MCU Output Converter list file" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objdump.listfile.612475112"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.hex.1843134928" name="MCU Output Converter Hex" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.hex.24279848"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.binary.2027895090" name="MCU Output Converter Binary" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.binary.1590829995"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.980841341" name="MCU Output Converter Verilog" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.verilog.318001515"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.1487138610" name="MCU Output Converter Motorola S-rec" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.srec.1304486132"/>
+							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.223489290" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.1736130350"/>
+						</toolChain>
+					</folderInfo>
 					<folderInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.679840075.800308933" name="/" resourcePath="Core">
 						<toolChain id="com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.exe.debug.699914774" name="MCU ARM GCC" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.toolchain.exe.debug" unusedChildren="">
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_mcu.1175703855.1158153294" name="MCU" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_mcu.1175703855"/>
@@ -140,7 +163,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares"/>
 						<entry excluding="streamports/ARM_ITM|streamports/File|streamports/TCPIP|streamports/UDP|streamports/RingBuffer|streamports/TCPIP_Win32|streamports/STM32_USB_CDC|streamports/XMOS_xScope|extras|kernelports/BareMetal|kernelports/ThreadX|kernelports/Zephyr" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="TraceRecorder"/>
-						<entry excluding="FontClassic|FontGFX|FontSmooth|FontMicroElectronika|Bitmap/BitmapFromFlashBackground16bit.cpp|Bitmap/BitmapFromFlashTransparent.cpp|Bitmap/BMPFromFile32b.cpp|Bitmap/BitmapFromFlashAlpha.cpp|Bitmap/BitmapFromFlash32b.cpp|Bitmap/BitmapFromFlash24b.cpp|Bitmap/BitmapFromFlash16b.cpp|TFT_BMP.cpp|Bitmap/BMPFromFileTransparent.cpp|Bitmap/BMPFromFile.cpp|Video|Transformation|Driver/ST7789.cpp|Driver/ILI9225.cpp|Animated" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="uTFT2"/>
+						<entry excluding="FontClassic|FontGFX|FontSmooth|FontMicroElectronika|Bitmap/BitmapFromFlashBackground16bit.cpp|Bitmap/BitmapFromFlashTransparent.cpp|Bitmap/BMPFromFile32b.cpp|Bitmap/BitmapFromFlashAlpha.cpp|Bitmap/BitmapFromFlash32b.cpp|Bitmap/BitmapFromFlash24b.cpp|Bitmap/BitmapFromFlash16b.cpp|TFT_BMP.cpp|Bitmap/BMPFromFileTransparent.cpp|Bitmap/BMPFromFile.cpp|Transformation|Animated" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="uTFT2"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

@@ -7,7 +7,7 @@
 //SSD1306 128 64 1 bit
 uint8_t LCD_Buffer[128 * 8];
 
-uTFT_LCD_t LCD_0 = {
+TFT_LCD_t LCD_0 = {
 		128,                  // Ширина экрана
 		64,                   // Высота экрана
 		SSD1306,              // Драйвер
