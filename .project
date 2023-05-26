@@ -32,6 +32,21 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Cli</name>
+			<type>2</type>
+			<location>D:/Dropbox/Actual/Drivers/SimpleCLI-master/src</location>
+		</link>
+		<link>
+			<name>Step</name>
+			<type>2</type>
+			<location>D:/Dropbox/Actual/Drivers/Gyver/GyverStepper 2.64/src</location>
+		</link>
+		<link>
+			<name>libs</name>
+			<type>2</type>
+			<location>D:/Dropbox/Actual/Drivers/libs</location>
+		</link>
+		<link>
 			<name>uTFT2</name>
 			<type>2</type>
 			<location>D:/Dropbox/Actual/Drivers/Display/uTFT2</location>
