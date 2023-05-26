@@ -40,20 +40,40 @@ TFT tft;
 #define M2   4
 #define M3   5
 
-GStepper2<STEPPER2WIRE> stepper(200, STEP, DIR, EN);// драйвер step-dir + пин enable
+GStepper2<STEPPER2WIRE> stepper(200, STEP, DIR, EN); // драйвер step-dir + пин enable
 
 constexpr int a[12] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 constexpr int length_a = sizeof(a) / sizeof(int);
 
-extern "C" void BLE_IRQHandle(void)
-{
-  ble.USART_RX_IRQHandler();
+extern "C" void BLE_IRQHandle(void) {
+	ble.USART_RX_IRQHandler();
 }
 
+void pingCallback(cmd *c) {
+	Command cmd(c); // Create wrapper object
+	Log.e("Pong!");
+}
 
-void cliCallBack(char * data)
-{
-  cli.parse(data);
+// Callback in case of an error
+void errorCallback(cmd_error *e) {
+	CommandError cmdError(e); // Create wrapper object
+
+	Log.e("ERROR: ");
+	Log.e(cmdError.toString().c_str());
+
+}
+
+void cliCallBack(char *data) {
+	cli.parse(data);
+}
+
+void cliAddCommand() {
+	Command ping;
+
+	ping = cli.addCmd("ping", pingCallback);
+
+    // Set error Callback
+    cli.setOnError(errorCallback);
 }
 
 extern "C" void setup(void) {
@@ -63,15 +83,18 @@ extern "C" void setup(void) {
 
 	Log.reset();
 	Log.clear();
-	Log.i ((char*)"Запуск");
-	Log.e((char*)"Ошибка");
+	Log.i((char*) "Запуск");
+	Log.e((char*) "Ошибка");
 
 	ble.init(&huart1);
 
-    ble.setCallback(cliCallBack);
+	ble.setCallback(cliCallBack);
+
+	cliAddCommand();
+
+	ble.Send((char*)"Hello");
 
 	//USART1->CR1 |= USART_CR1_RXNEIE;
-
 
 	__HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
 
@@ -112,7 +135,7 @@ extern "C" void setup(void) {
 	while (1) {
 		//stepper.tick(); //Перенос в таймер
 
-        ble.Task();
+		ble.Task();
 
 	}
 }
@@ -120,8 +143,4 @@ extern "C" void setup(void) {
 extern "C" void update(void) {
 	tft.driver.Update();
 }
-
-
-
-
 
