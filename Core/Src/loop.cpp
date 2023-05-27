@@ -11,6 +11,8 @@
 #include "SimpleCLI.h"
 #include "BLE.h"
 
+#include "mString.h"
+
 SimpleCLI cli;
 
 BLE ble;
@@ -76,6 +78,57 @@ void cliAddCommand() {
     cli.setOnError(errorCallback);
 }
 
+uint16_t     settingMiliAmper    = 800;    //V0
+uint16_t     settingSteps        = 200;    //V1
+uint16_t     settingMicrostep    = 1;      //V2
+uint16_t     settingMotorOnOff   = 1;      //V3
+uint16_t     settingMaxSpeed     = 100;    //V4
+uint16_t     settingAcceleration = 2000;   //V5
+uint16_t     settingTarget       = 0;      //V6
+uint16_t     settingReady        = 0;      //V7
+
+mString <1024> stringOut;
+
+void sendAllV(void)
+{
+	stringOut.clear();
+	stringOut += "!V/";
+	stringOut.add(settingMiliAmper);
+	stringOut += "/";
+	stringOut.add(settingSteps);
+	stringOut += "/";
+	stringOut.add(settingMicrostep);
+	stringOut += "/";
+	stringOut.add(settingMotorOnOff);
+	stringOut += "/";
+	stringOut.add(settingMaxSpeed);
+	stringOut += "/";
+	stringOut.add(settingAcceleration);
+	stringOut += "/";
+	stringOut.add(settingTarget);
+	stringOut += "/222";
+	stringOut.add(settingReady);
+	uint8_t crc;
+	crc = ble.CRC8(&stringOut.buf[1], stringOut.length()-1);
+	stringOut += ";";
+	stringOut.add(crc);
+	stringOut += "$\n";
+
+	HAL_UART_Transmit_DMA(&huart1, (uint8_t*) &stringOut.buf[0], stringOut.length());
+
+}
+
+
+//char str[1024]={0};
+//char crc;
+//crc = CRC8(&outstr[0], strlen(outstr));
+//sprintf(str, "!%s;%d$", outstr, crc);
+//Log.s(str);
+//HAL_UART_Transmit(_huart, (uint8_t*) &str[0], strlen(str), 1000);
+
+
+
+
 extern "C" void setup(void) {
 
 	USART2->BRR = 0x12; //2MHz
@@ -132,10 +185,22 @@ extern "C" void setup(void) {
 	stepper.setAcceleration(2000); // ускорение
 	stepper.setTarget(3000000);       // цель
 
+	uint32_t time = NOW;
+
 	while (1) {
 		//stepper.tick(); //Перенос в таймер
 
 		ble.Task();
+
+
+
+        if ((NOW - time) > 50)
+		{
+        	DEBUG1;
+        	time = NOW;
+        	sendAllV(); //190uS -g  126uS -f
+        	DEBUG0;
+		}
 
 	}
 }

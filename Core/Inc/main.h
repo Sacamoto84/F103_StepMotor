@@ -87,9 +87,12 @@ void Error_Handler(void);
 #define M2_GPIO_Port GPIOB
 #define M3_Pin GPIO_PIN_4
 #define M3_GPIO_Port GPIOB
+#define Debug_Pin GPIO_PIN_5
+#define Debug_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-
+#define DEBUG1 HAL_GPIO_WritePin(Debug_GPIO_Port, Debug_Pin, GPIO_PIN_SET)
+#define DEBUG0 HAL_GPIO_WritePin(Debug_GPIO_Port, Debug_Pin, GPIO_PIN_RESET)
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
