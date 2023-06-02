@@ -1,130 +1,51 @@
 #include "main.h"
-#include "TFT.h"
-#include "i2c.h"
-#include "FontClassic/FontClassic.h"
 
-#include "logUART.h"
+#include "global.h"
 
-#include "GyverStepper2.h"
-#include "ArduinoPin.h"
 
-#include "SimpleCLI.h"
-#include "BLE.h"
 
-#include "mString.h"
-
-SimpleCLI cli;
-
-BLE ble;
-
-classLog Log;
-
-//SSD1306 128 64 1 bit
-uint8_t LCD_Buffer[128 * 8 + 16];
-
-TFT_LCD_t LCD_0 = { 128,                  // Ширина экрана
-		64,                   // Высота экрана
-		SSD1306,              // Драйвер
-		1,                    // bit
-		NULL,                 // notUse0
-		&hi2c2,	              // I2C
-		0x78,                 // адресс
-		NULL,                 // 16 бит буффер
-		&LCD_Buffer[1],       // !16 бит буффер
-		};
-
-TFT tft;
-
-#define STEP 0
-#define DIR  1
-#define EN   2
-#define M1   3
-#define M2   4
-#define M3   5
-
-GStepper2<STEPPER2WIRE> stepper(200, STEP, DIR, EN); // драйвер step-dir + пин enable
-
-constexpr int a[12] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-constexpr int length_a = sizeof(a) / sizeof(int);
 
 extern "C" void BLE_IRQHandle(void) {
 	ble.USART_RX_IRQHandler();
 }
 
-void pingCallback(cmd *c) {
-	Command cmd(c); // Create wrapper object
-	Log.e("Pong!");
-}
 
-// Callback in case of an error
-void errorCallback(cmd_error *e) {
-	CommandError cmdError(e); // Create wrapper object
-
-	Log.e("ERROR: ");
-	Log.e(cmdError.toString().c_str());
-
-}
 
 void cliCallBack(char *data) {
 	cli.parse(data);
 }
 
-void cliAddCommand() {
-	Command ping;
 
-	ping = cli.addCmd("ping", pingCallback);
 
-    // Set error Callback
-    cli.setOnError(errorCallback);
-}
+//extern uint16_t settingMiliAmper;    //V0
+//extern uint16_t settingSteps;        //V1
+//extern uint16_t settingMicrostep;    //V2
+//extern uint16_t settingMotorOnOff;   //V3
+//extern uint16_t settingMaxSpeed;     //V4
+//extern uint16_t settingAcceleration; //V5
+//extern uint16_t settingTarget;       //V6
+//extern uint16_t settingReady;        //V7
 
-uint16_t     settingMiliAmper    = 800;    //V0
-uint16_t     settingSteps        = 200;    //V1
-uint16_t     settingMicrostep    = 1;      //V2
-uint16_t     settingMotorOnOff   = 1;      //V3
-uint16_t     settingMaxSpeed     = 100;    //V4
-uint16_t     settingAcceleration = 2000;   //V5
-uint16_t     settingTarget       = 0;      //V6
-uint16_t     settingReady        = 0;      //V7
-
-mString <1024> stringOut;
-
-void sendAllV(void)
+void lcdInfo(void)
 {
-	stringOut.clear();
-	stringOut += "!V/";
-	stringOut.add(settingMiliAmper);
-	stringOut += "/";
-	stringOut.add(settingSteps);
-	stringOut += "/";
-	stringOut.add(settingMicrostep);
-	stringOut += "/";
-	stringOut.add(settingMotorOnOff);
-	stringOut += "/";
-	stringOut.add(settingMaxSpeed);
-	stringOut += "/";
-	stringOut.add(settingAcceleration);
-	stringOut += "/";
-	stringOut.add(settingTarget);
-	stringOut += "/222";
-	stringOut.add(settingReady);
-	uint8_t crc;
-	crc = ble.CRC8(&stringOut.buf[1], stringOut.length()-1);
-	stringOut += ";";
-	stringOut.add(crc);
-	stringOut += "$\n";
+	char str[64];
+	tft.Fill(0);
+	tft.uTFT.CurrentX = 0;
+	tft.uTFT.CurrentY = 0;
+	sprintf(str,"%d mA", settingMiliAmper);
+	FontClassicPuts(&tft, str, &Font_7x10, 0);
 
-	HAL_UART_Transmit_DMA(&huart1, (uint8_t*) &stringOut.buf[0], stringOut.length());
+	tft.uTFT.CurrentX = 0;
+	tft.uTFT.CurrentY = 9;
+	sprintf(str,"%d on off", settingMotorOnOff);
+	FontClassicPuts(&tft, str, &Font_7x10, 0);
+
+
+	tft.driver.Update();
 
 }
 
 
-//char str[1024]={0};
-//char crc;
-//crc = CRC8(&outstr[0], strlen(outstr));
-//sprintf(str, "!%s;%d$", outstr, crc);
-//Log.s(str);
-//HAL_UART_Transmit(_huart, (uint8_t*) &str[0], strlen(str), 1000);
 
 
 
@@ -151,10 +72,6 @@ extern "C" void setup(void) {
 
 	__HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
 
-	Log.i("1");
-
-	int z = length_a;
-	z++;
 
 	setArduinoPin(STEP, STEP_GPIO_Port, STEP_Pin);
 	setArduinoPin(DIR, DIR_GPIO_Port, DIR_Pin);
@@ -173,8 +90,7 @@ extern "C" void setup(void) {
 	tft.driver.SSD1306_Contrast(200);
 	tft.SetFontColor(1, 0);
 
-	FontClassicPuts(&tft, (char*) "HeloПр123", &Font_7x10, 0);
-	tft.driver.Update();
+
 
 	stepper.invertEn(true);
 
@@ -194,13 +110,15 @@ extern "C" void setup(void) {
 
 
 
-        if ((NOW - time) > 50)
+        if ((NOW - time) > 25)
 		{
         	DEBUG1;
         	time = NOW;
         	sendAllV(); //190uS -g  126uS -f
         	DEBUG0;
 		}
+
+      lcdInfo();
 
 	}
 }
